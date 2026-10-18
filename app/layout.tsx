@@ -14,7 +14,10 @@ export const metadata: Metadata = {
     "A neighbourhood coffee shop in Brooklyn for specialty coffee, fresh pastries and light lunches. Open mic Fridays, coffee tastings on Saturdays.",
 };
 
-const footerHours = hours.map((h) => ({ days: h.days, time: `${formatTime(h.open)}–${formatTime(h.close)}` }));
+const footerHours = [
+  ...hours.map((h) => ({ days: h.days, time: `${formatTime(h.open)}–${formatTime(h.close)}` })),
+  { days: "Sun", time: "Closed" },
+];
 const reserveNote = `${footerHours.map((h) => `${h.days} ${h.time}`).join(", ")}. Last booking an hour before close.`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

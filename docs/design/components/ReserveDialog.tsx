@@ -117,7 +117,7 @@ function ReserveForm({ action, today, note }: { action: Action; today: string; n
       {field("party", "Party size", { type: "number", min: 1, max: 12, inputMode: "numeric" })}
       <div className="grid gap-4 sm:grid-cols-2">
         {field("date", "Date", { type: "date", min: today })}
-        {field("time", "Time", { type: "time", min: "07:00", max: "21:00", step: 900 })}
+        {field("time", "Time", { type: "time", min: "08:00", max: "19:00", step: 900 })}
       </div>
       {note && <p className="text-caption text-roast-soft">{note}</p>}
       <Button type="submit" disabled={pending} className="mt-2">

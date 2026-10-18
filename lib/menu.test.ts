@@ -19,9 +19,12 @@ test("menu CSV becomes 20 items in 4 categories, 5 favourites, all with images",
 });
 
 test("reservation hours", () => {
-  assert.equal(canSeat("2026-10-16", "20:30"), true); // Friday, open till 22:00
-  assert.equal(canSeat("2026-10-16", "21:30"), false); // last seating is an hour before close
-  assert.equal(canSeat("2026-10-18", "07:30"), false); // Sunday opens at 08:00
+  assert.equal(canSeat("2026-10-16", "19:00"), true); // Friday, open till 20:00
+  assert.equal(canSeat("2026-10-16", "19:30"), false); // last seating is an hour before close
+  assert.equal(canSeat("2026-10-16", "07:45"), false); // weekdays open at 08:00
+  assert.equal(canSeat("2026-10-17", "08:30"), false); // Saturday opens at 09:00
+  assert.equal(canSeat("2026-10-17", "09:00"), true);
+  assert.equal(canSeat("2026-10-18", "12:00"), false); // Sunday closed
   assert.equal(canSeat("2026-10-18", "7pm"), false);
 });
 
