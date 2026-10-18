@@ -1,2 +1,22 @@
 @import "tailwindcss";
 @import "../docs/design/tokens.css";
+
+/* n8n chat widget (app/ChatWidget.tsx), mapped onto the brand tokens.
+   html:root outranks the widget's own :root defaults, which load after this file. */
+html:root {
+  --chat--color--primary: var(--color-counter);
+  --chat--color--primary-shade-50: var(--color-counter-hover);
+  --chat--color--primary--shade-100: var(--color-counter-hover);
+  --chat--color--secondary: var(--color-counter);
+  --chat--color-secondary-shade-50: var(--color-counter-hover);
+  --chat--color-white: var(--color-white);
+  --chat--color-light: var(--color-plaster);
+  --chat--color-light-shade-50: var(--color-latte);
+  --chat--color-light-shade-100: var(--color-latte-deep);
+  --chat--color-medium: var(--color-latte-deep);
+  --chat--color-dark: var(--color-roast);
+  --chat--color-typing: var(--color-roast-soft);
+  --chat--font-family: var(--font-sans);
+  --chat--heading--font-size: 1.5em;
+  --chat--border-radius: 0.75rem;
+}

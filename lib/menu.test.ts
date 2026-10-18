@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { parseCsv, toMenu, byCategory } from "./menu.ts";
 import { canSeat, nextOn, todayInShop, formatTime } from "./hours.ts";
+import { usPhone } from "./phone.ts";
 
 test("parseCsv keeps commas and doubled quotes inside quoted fields", () => {
   assert.deepEqual(parseCsv('a,b\r\n1,"x, ""y"""\n'), [["a", "b"], ["1", 'x, "y"']]);
@@ -26,6 +27,13 @@ test("reservation hours", () => {
   assert.equal(canSeat("2026-10-17", "09:00"), true);
   assert.equal(canSeat("2026-10-18", "12:00"), false); // Sunday closed
   assert.equal(canSeat("2026-10-18", "7pm"), false);
+});
+
+test("US phone numbers", () => {
+  assert.equal(usPhone("(718) 555-0142"), "+17185550142");
+  assert.equal(usPhone("+1 718 555 0142"), "+17185550142");
+  assert.equal(usPhone("555-0199"), null);
+  assert.equal(usPhone("2718 555 0142"), null); // 11 digits not starting with 1
 });
 
 test("dates", () => {

@@ -3,6 +3,7 @@ import { Archivo, Young_Serif } from "next/font/google";
 import { SiteFooter, SiteHeader } from "@/docs/design/components";
 import { formatTime, hours } from "@/lib/hours";
 import { reserveTable } from "./actions";
+import { ChatWidget } from "./ChatWidget";
 import "./globals.css";
 
 const archivo = Archivo({ subsets: ["latin"], axes: ["wdth"], variable: "--font-archivo" });
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader reserveAction={reserveTable} reserveNote={reserveNote} />
         <main className="flex-1">{children}</main>
         <SiteFooter address={["214 Lorimer Street", "Brooklyn, NY 11211"]} hours={footerHours} />
+        <ChatWidget />
       </body>
     </html>
   );

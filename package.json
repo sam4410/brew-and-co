@@ -10,6 +10,7 @@
     "test": "node --test lib/menu.test.ts"
   },
   "dependencies": {
+    "@n8n/chat": "1.41.2",
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0"
