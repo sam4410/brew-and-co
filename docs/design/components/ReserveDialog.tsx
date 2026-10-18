@@ -6,7 +6,7 @@ import { Button } from "./Button";
 type State = {
   ok?: boolean;
   summary?: string;
-  errors?: Partial<Record<"name" | "party" | "date" | "time", string>>;
+  errors?: Partial<Record<"name" | "party" | "date" | "time" | "phone" | "email" | "form", string>>;
   values?: Record<string, string>;
 };
 type Action = (prev: State, formData: FormData) => Promise<State>;
@@ -85,7 +85,7 @@ function ReserveForm({ action, today, note }: { action: Action; today: string; n
     );
   }
 
-  const field = (name: "name" | "party" | "date" | "time", label: string, props: ComponentProps<"input">) => {
+  const field = (name: "name" | "party" | "date" | "time" | "phone" | "email", label: string, props: ComponentProps<"input">) => {
     const error = state.errors?.[name];
     return (
       <div className="flex flex-col gap-1">
@@ -119,9 +119,16 @@ function ReserveForm({ action, today, note }: { action: Action; today: string; n
         {field("date", "Date", { type: "date", min: today })}
         {field("time", "Time", { type: "time", min: "08:00", max: "19:00", step: 900 })}
       </div>
+      {field("phone", "Phone", { type: "tel", autoComplete: "tel", inputMode: "tel", maxLength: 20 })}
+      {field("email", "Email (optional)", { type: "email", autoComplete: "email", maxLength: 120, required: false })}
       {note && <p className="text-caption text-roast-soft">{note}</p>}
+      {state.errors?.form && (
+        <p role="alert" className="text-caption text-error">
+          {state.errors.form}
+        </p>
+      )}
       <Button type="submit" disabled={pending} className="mt-2">
-        {pending ? "Requesting…" : "Request table"}
+        {pending ? "Booking…" : "Book table"}
       </Button>
     </form>
   );

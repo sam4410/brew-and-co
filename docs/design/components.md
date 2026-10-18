@@ -183,13 +183,14 @@ Success: replace the form with "Subscribed. Check your inbox to confirm." (same 
 
 Anatomy: a `Button` "Reserve a table" that opens a native `<dialog>` with `showModal()`, so focus
 is trapped, Esc closes it and focus returns to the trigger. Inside: an `h2`, a 44px square close
-button, and a form with visible labels for Name, Party size (1–12), Date (`min` = today) and
-Time (15-minute steps), then a `primary` "Request table" button. The dialog uses `shadow-float`
+button, and a form with visible labels for Name, Party size (1–12), Date (`min` = today),
+Time (15-minute steps), Phone and Email (optional), then a `primary` "Book table" button. The dialog uses `shadow-float`
 (it floats) and a `roast/60` backdrop.
 Validation: the Server Action **must validate again** (trust boundary). Errors show under each
-field with `aria-invalid` and `aria-describedby`, the same pattern as `NewsletterForm`. Entered
+field with `aria-invalid` and `aria-describedby`, the same pattern as `NewsletterForm`; an
+`errors.form` message (e.g. the booking service is down) shows above the button as `role="alert"`. Entered
 values come back in `values` so the form isn't wiped. Success replaces the form with a
-`role="status"` line: "Table requested for 4 on Friday, October 23 at 7:30pm. See you soon."
+`role="status"` line: "Table booked for 4 on Friday, October 23 at 7:30pm. See you soon."
 Each open remounts the form, so it starts fresh.
 
 ---
