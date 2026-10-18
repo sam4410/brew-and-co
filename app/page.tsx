@@ -13,8 +13,8 @@ const events = [
   {
     title: "Open mic night",
     dow: 5,
-    when: "Every Friday, 7–10pm",
-    text: "Songs, poems, the odd stand-up set. Sign up at the counter from 6pm; everyone gets ten minutes and a free drip coffee.",
+    when: "Every Friday, 5–8pm",
+    text: "Songs, poems, the odd stand-up set. Sign up at the counter from 4pm; everyone gets ten minutes and a free drip coffee.",
     image: { src: "/images/event-live-music.webp", alt: "Singer with an acoustic guitar performing at a microphone" },
   },
   {
