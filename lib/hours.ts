@@ -1,9 +1,7 @@
-// Opening hours, Sunday = 0. Times are "HH:MM" in shop time (America/New_York).
+// Opening hours, Sunday = 0. Times are "HH:MM" in shop time (America/New_York). Days not listed are closed.
 export const hours: { days: string; open: string; close: string; dows: number[] }[] = [
-  { days: "Mon–Thu", open: "07:00", close: "18:00", dows: [1, 2, 3, 4] },
-  { days: "Fri", open: "07:00", close: "22:00", dows: [5] },
-  { days: "Sat", open: "08:00", close: "18:00", dows: [6] },
-  { days: "Sun", open: "08:00", close: "16:00", dows: [0] },
+  { days: "Mon–Fri", open: "08:00", close: "20:00", dows: [1, 2, 3, 4, 5] },
+  { days: "Sat", open: "09:00", close: "20:00", dows: [6] },
 ];
 
 const minutes = (t: string) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3, 5));
