@@ -1,0 +1,149 @@
+/*
+ * Brew & Co design tokens — Tailwind CSS v4.
+ *
+ * Usage: in app/globals.css, replace the existing :root / @theme blocks with
+ *   @import "tailwindcss";
+ *   @import "../docs/design/tokens.css";
+ * Every --color-*, --font-*, --text-*, --radius-*, --ease-* below becomes a
+ * Tailwind utility (bg-roast, text-counter, font-sign, text-display, rounded-control …).
+ * Fonts are loaded with next/font in app/layout.tsx (see style-guide.md §3).
+ */
+
+@theme {
+  /* Reset Tailwind's default palette so only brand colours exist. */
+  --color-*: initial;
+
+  /* ── Palette: named after the shop, not the hue ─────────────────────── */
+  --color-plaster: #fbfaf8;     /* walls (ref 3). Default page background */
+  --color-latte: #e6d3b8;       /* steamed-milk tan (ref 1). Secondary surface */
+  --color-latte-deep: #d6bd9b;  /* borders and dividers on latte */
+  --color-roast: #2a1b14;       /* signboard / dark roast. Text + dark surfaces */
+  --color-roast-soft: #5b4a40;  /* secondary text on light surfaces */
+  --color-chalk: #efebe4;       /* text on roast (menu-board chalk) */
+  --color-chalk-dim: #b9ada2;   /* secondary text on roast */
+  --color-counter: #1e2b4a;     /* fluted navy counter (ref 2). Primary action */
+  --color-counter-hover: #2c3d66;
+  --color-oak: #a8713f;         /* herringbone floor. Decorative / large text only */
+  --color-oak-deep: #8a5a2e;    /* oak that passes AA as text on plaster */
+  --color-lamp: #e8b65a;        /* rattan pendant glow. Accent on roast only */
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Feedback */
+  --color-success: #2f6b47;
+  --color-error: #a33a2a;
+  --color-error-on-roast: #f08a76;
+
+  /* ── Type ───────────────────────────────────────────────────────────── */
+  /* Variables are set by next/font in app/layout.tsx */
+  --font-serif: var(--font-young-serif), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-sign: var(--font-archivo), system-ui, sans-serif; /* used with font-stretch: 125% */
+
+  /* Major-third scale (1.25) on a 16px base. Line heights tighten as size grows. */
+  --text-caption: 0.8rem;
+  --text-caption--line-height: 1.4;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.55;
+  --text-h4: 1.5625rem;
+  --text-h4--line-height: 1.3;
+  --text-h3: 1.953rem;
+  --text-h3--line-height: 1.2;
+  --text-h2: clamp(2rem, 1.4rem + 2.4vw, 3.052rem);
+  --text-h2--line-height: 1.1;
+  --text-h1: clamp(2.6rem, 1.6rem + 4vw, 4.768rem);
+  --text-h1--line-height: 1.02;
+  --text-sign: clamp(2.2rem, 1rem + 6vw, 6rem);
+  --text-sign--line-height: 1;
+  --text-sign--letter-spacing: 0.32em;
+
+  /* ── Shape ──────────────────────────────────────────────────────────── */
+  --radius-control: 2px;   /* buttons, inputs: cut like a sign panel */
+  --radius-pill: 999px;    /* filter chips, avatars */
+  /* Cards and photos stay square (0). Two radii only, on purpose. */
+
+  /* ── Elevation: borders do the work; one shadow for things that float ─ */
+  --shadow-float: 0 12px 32px -12px rgb(42 27 20 / 0.35);
+
+  /* ── Layout ─────────────────────────────────────────────────────────── */
+  --container-page: 72rem;   /* max content width */
+  --container-prose: 38rem;  /* ~70 characters of body text */
+  --spacing-gutter: 1rem;    /* page side gutter, mobile */
+  --spacing-gutter-lg: 2rem; /* page side gutter, ≥ md */
+  --spacing-section: clamp(4rem, 2.5rem + 6vw, 8rem); /* vertical rhythm between sections */
+
+  /* ── Motion ─────────────────────────────────────────────────────────── */
+  --ease-pour: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration-quick: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 360ms;
+}
+
+/* Awning stripe — the ceiling stripes of ref 2. Use via .stripe-band */
+@utility stripe-band {
+  height: 0.75rem;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-roast) 0 1.5rem,
+    var(--color-plaster) 1.5rem 3rem
+  );
+}
+
+/* Shop-sign lettering: wide Archivo, tracked, uppercase. Display sizes only. */
+@utility sign-type {
+  font-family: var(--font-sign);
+  font-stretch: 125%;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  /* tracking adds trailing space after the last letter; pull it back */
+  margin-inline-end: -0.32em;
+}
+
+@layer base {
+  html {
+    background: var(--color-plaster);
+    color: var(--color-roast);
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-counter);
+    outline-offset: 2px;
+  }
+
+  .surface-roast :focus-visible {
+    outline-color: var(--color-lamp);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Dark section: the signboard. Children inherit chalk text. */
+@utility surface-roast {
+  background: var(--color-roast);
+  color: var(--color-chalk);
+}
+
+@utility surface-latte {
+  background: var(--color-latte);
+  color: var(--color-roast);
+}
